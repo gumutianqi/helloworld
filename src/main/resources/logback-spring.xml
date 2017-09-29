@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <contextName>spring-boot2-case</contextName>
+    <property name="application.name" value="helloworld"/>
+    <property name="log.path" value="./logs/${application.name}"/>
+    <property name="log.level" value="INFO"/>
+
+    <!--输出到控制台-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder 默认配置为PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--输出到文件-->
+    <!-- DEBUG、INFO、WARN、ERROR级别日志 appender -->
+    <appender name="DEBUG_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/debug-log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/debug-log-%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}:%line - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="com.weteam" level="DEBUG"/>
+
+    <root level="${log.level}">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="DEBUG_LOG"/>
+    </root>
+
+    <!--logback.LogbackDemo：类的全路径 -->
+    <logger name="com.weteam.test" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="DEBUG_LOG"/>
+    </logger>
+
+    <springProfile name="dev,test">
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="com.weteam" level="DEBUG"/>
+    </springProfile>
+
+    <springProfile name="beta">
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="com.weteam" level="INFO"/>
+    </springProfile>
+
+    <springProfile name="release">
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="com.weteam" level="INFO"/>
+    </springProfile>
+</configuration>

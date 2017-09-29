@@ -1,0 +1,39 @@
+info:
+  build:
+    artifact: @project.artifactId@
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+    environment: ${spring.profiles.active}
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: ${info.build.name}-${spring.profiles.active}
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: true
+management:
+  security:
+    enabled: false
+debug: false
+server:
+  port: 9101
+  tomcat:
+    max-connections: 100
+    max-threads: 100
+
+## Swagger configuration
+swagger:
+  enabled: true
+  title: ${info.build.name}
+  description: ${info.build.description}
+  version: ${info.build.version}
+  contact:
+    name: Larry Koo
+    email: larrykoo@126.com
+    url: https://gumutianqi.github.io/blog/
+  base-package: com.weteam.helloworld.controller
+  base-path: /**
