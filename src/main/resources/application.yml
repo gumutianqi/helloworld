@@ -20,7 +20,7 @@ management:
     enabled: false
 debug: false
 server:
-  port: 9101
+  port: 8080
   tomcat:
     max-connections: 100
     max-threads: 100

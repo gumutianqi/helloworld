@@ -1,22 +1,13 @@
 # Version 1.0.0
-FROM java:8
+FROM openjdk:8-jdk-alpine
 
 MAINTAINER LarryKoo "larrykoo@126.com"
 
 # The environment variable
-ENV APP_NAME @project.build.finalName@
-ENV APP_VERSION @project.version@
+ENV APP_NAME="helloworld"
+ENV APP_VERSION=""
 ENV JAVA_OPTS=""
 
-ADD pom.xml /tmp/build/
-RUN cd /tmp/build && ./mvnw -q dependency:resolve
-
-ADD src /tmp/build/src
-        #构建应用
-RUN cd /tmp/build && ./mvnw -q -DskipTests=true package \
-        #拷贝编译结果到指定目录
-        && mv target/*.jar /app.jar \
-        #清理编译痕迹
-        && cd / && rm -rf /tmp/build
-
+EXPOSE 8080
+COPY target/$APP_NAME-*.jar app.jar
 ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar
