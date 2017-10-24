@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Description: TODO
  * Created by LarryKoo (gumutianqi@gmail.com) on 2017/9/29 10:25
- * Since: 1.0.0
+ * @author larrykoo
  */
 @RestController
 @RequestMapping(value = "/hello")

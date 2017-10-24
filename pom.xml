@@ -26,10 +26,16 @@
         <docker.registry>registry.cn-hangzhou.aliyuncs.com</docker.registry>
         <docker.registry.namespace>weteam</docker.registry.namespace>
 		<guava.version>21.0</guava.version>
+		<ip2region.version>1.4</ip2region.version>
         <spring-boot-starter-swagger.version>1.4.1.RELEASE</spring-boot-starter-swagger.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.lionsoul</groupId>
+			<artifactId>ip2region</artifactId>
+			<version>${ip2region.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>

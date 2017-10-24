@@ -20,7 +20,6 @@ import junit.framework.TestCase;
 public class CompletableFutureDemo extends TestCase {
     @Override
     public void setUp() throws Exception {
-        super.setUp();
     }
 
     @Override
@@ -28,5 +27,7 @@ public class CompletableFutureDemo extends TestCase {
         super.tearDown();
     }
 
+    public void testDemo() {
+    }
 
 }
