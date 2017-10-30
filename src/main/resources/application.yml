@@ -15,6 +15,47 @@ spring:
     throw-exception-if-no-handler-found: true
   resources:
     add-mappings: true
+  datasource:
+    # com.mysql.jdbc.Driver
+    driver-class-name: com.alibaba.druid.proxy.DruidDriver
+    url: jdbc:mysql://localhost:3306/beetlsql?useunicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: root
+    ## 配置使用详情：https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+    druid:
+      enable: true
+      initial-size: 5
+      min-idle: 8
+      max-active: 15
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      use-global-data-source-stat: true
+#      filter:
+#        slf4j:
+#          # 开启 Slf4jFilter
+#          enabled: true
+#        wall:
+#          # 开启 WallFilter
+#          enabled: true
+#          ## WallConfig 配置
+#          config:
+#            select-all-column-allow: false
+#        config:
+#          # 开启 ConfigFilter
+#          enabled: true
+#        stat:
+#          # 开启 Web 监控
+#          enabled: true
+#      aop-stat:
+#        # 开启 Aop 监控
+#        enabled: true
+#      stat-view-servlet:
+#        # 开启监控页面
+#        enabled: true
 management:
   security:
     enabled: false
@@ -24,6 +65,12 @@ server:
   tomcat:
     max-connections: 100
     max-threads: 100
+
+endpoints:
+  actuator:
+    enabled: true
+  druid:
+    enabled: true
 
 ## Swagger configuration
 swagger:
@@ -37,3 +84,30 @@ swagger:
     url: https://gumutianqi.github.io/blog/
   base-package: com.weteam.helloworld.controller
   base-path: /**
+
+spring:
+
+## BeetlSQL configuration
+# 开发 debug 模式, 默认是true，即向控制台输出执行时候的sql，参数，执行时间，以及执行的位置，每次修改sql文件的时候，自动检测sql文件修改.
+beetl-beetlsq.dev: true
+beetl:
+  # 模版根目录
+  templatesPath: templates
+  # 模版后缀，默认为 btl
+  suffix: btl
+beetlsql:
+  # 默认为/sql, 作为存放sql文件的根目录，位于/resources/sql目录下
+  sqlPath: /sql
+  # Dao后缀，默认为Dao
+  daoSuffix: Dao
+  # 默认为com，此选项配置beetlsql.daoSuffix来自动扫描com包极其子包下的所有以Dao结尾的Mapper类。以本章例子而言，你可以配置“com.bee.sample.ch5.dao”
+  basePackage: com.
+  # 默认是org.beetl.sql.core.UnderlinedNameConversion,能将下划线分割的数据库命名风格转化为java驼峰命名风格;
+  # 还有常用的DefaultNameConversion，数据库命名完全和Java命名一直，以及JPA2NameConversion，兼容JPA命名;
+  nameConversion: org.beetl.sql.core.UnderlinedNameConversion
+  # 数据库风格，默认是org.beetl.sql.core.db.MySqlStyle.对应不同的数据库;
+  # 其他还有OracleStyle，PostgresStyle, SqlServerStyle, DB2SqlStyle, SQLiteStyle, H2Style
+  dbStyle: org.beetl.sql.core.db.MySqlStyle
+
+
+
