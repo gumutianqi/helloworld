@@ -42,7 +42,7 @@ public class BeetlSQLDemo extends TestCase {
     @Override
     public void setUp() throws Exception {
         ConnectionSource source = ConnectionSourceHelper.getSimple(
-                "com.mysql.jdbc.Driver",
+                "com.mysql.cj.jdbc.Driver",
                 "jdbc:mysql://localhost:3306/beetlsql?useunicode=true&useSSL=false&characterEncoding=utf8",
                 "root", "root");
         DBStyle mysql = new MySqlStyle();

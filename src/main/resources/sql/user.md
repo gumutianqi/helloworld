@@ -2,7 +2,7 @@ sample
 ===
 * 注释
 
-    select #use("cols")# from user where #use("condition")#
+	select #use("cols")# from user where #use("condition")#
 
 cols
 ===

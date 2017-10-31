@@ -11,42 +11,35 @@
 package com.weteam.helloworld.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import org.beetl.sql.ext.spring4.BeetlSqlDataSource;
-import org.beetl.sql.test.MysqlDBConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
  * @author LarryKoo (gumutianqi@gmail.com)
- * @description DB 连接池初始化
+ * @description Database connections configuration.
  * @date 2017/10/30 02:18
  * @since 1.0.0
  */
 @Configuration
 public class DataSourceConfig {
 
-    @Resource
-    private DruidDataSource dataSource;
+    private final static Logger log = LoggerFactory.getLogger(DataSourceConfig.class);
 
     @Bean("dataSource")
-    public DataSource druidSource() {
+    public DataSource druidSource(Environment env) {
         DruidDataSource ds = new DruidDataSource();
-        ds.setUrl(MysqlDBConfig.url);
-        ds.setUsername(MysqlDBConfig.userName);
-        ds.setPassword(MysqlDBConfig.password);
-        ds.setDriverClassName(MysqlDBConfig.driver);
+        ds.setUrl(env.getProperty("spring.datasource.url"));
+        ds.setUsername(env.getProperty("spring.datasource.username"));
+        ds.setPassword(env.getProperty("spring.datasource.password"));
+        ds.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
+
+        log.info("[DruidDataSource-1] start.");
         return ds;
-    }
-
-
-    @Bean
-    public BeetlSqlDataSource beetlSqlDataSource() {
-        BeetlSqlDataSource source = new BeetlSqlDataSource();
-        source.setMasterSource(dataSource);
-        return source;
     }
 
 }

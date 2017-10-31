@@ -28,22 +28,39 @@
 		<guava.version>21.0</guava.version>
 		<ip2region.version>1.4</ip2region.version>
         <spring-boot-starter-swagger.version>1.4.1.RELEASE</spring-boot-starter-swagger.version>
+		<druid.version>1.1.5</druid.version>
+		<beetl-framework-starter.version>1.1.16.RELEASE</beetl-framework-starter.version>
+		<mysql-connector-java.version>6.0.6</mysql-connector-java.version>
 	</properties>
 
 	<dependencies>
+		<!--<dependency>-->
+			<!--<groupId>com.alibaba</groupId>-->
+			<!--<artifactId>druid</artifactId>-->
+			<!--<version>${druid.version}</version>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
-			<version>1.1.5</version>
+			<version>${druid.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ibeetl</groupId>
 			<artifactId>beetl-framework-starter</artifactId>
-			<version>1.1.16.RELEASE</version>
+			<version>${beetl-framework-starter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.lionsoul</groupId>

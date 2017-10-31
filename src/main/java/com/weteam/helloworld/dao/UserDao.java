@@ -11,6 +11,7 @@
 package com.weteam.helloworld.dao;
 
 import com.weteam.helloworld.domain.UserDomain;
+import org.beetl.sql.core.annotatoin.SqlResource;
 import org.beetl.sql.core.mapper.BaseMapper;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
  * @date 2017/10/30 01:05
  * @since 1.0.0
  */
+@SqlResource("user")
 public interface UserDao extends BaseMapper<UserDomain> {
 
     /**

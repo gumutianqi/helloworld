@@ -16,8 +16,7 @@ spring:
   resources:
     add-mappings: true
   datasource:
-    # com.mysql.jdbc.Driver
-    driver-class-name: com.alibaba.druid.proxy.DruidDriver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/beetlsql?useunicode=true&useSSL=false&characterEncoding=utf8
     username: root
     password: root
@@ -34,28 +33,32 @@ spring:
       pool-prepared-statements: true
       max-open-prepared-statements: 20
       use-global-data-source-stat: true
-#      filter:
-#        slf4j:
-#          # 开启 Slf4jFilter
-#          enabled: true
-#        wall:
-#          # 开启 WallFilter
-#          enabled: true
-#          ## WallConfig 配置
-#          config:
-#            select-all-column-allow: false
-#        config:
-#          # 开启 ConfigFilter
-#          enabled: true
-#        stat:
-#          # 开启 Web 监控
-#          enabled: true
-#      aop-stat:
-#        # 开启 Aop 监控
-#        enabled: true
-#      stat-view-servlet:
-#        # 开启监控页面
-#        enabled: true
+      filter:
+        slf4j:
+          # 开启 Slf4jFilter
+          enabled: true
+        wall:
+          # 开启 WallFilter
+          enabled: true
+          ## WallConfig 配置
+          config:
+            select-all-column-allow: false
+        config:
+          # 开启 ConfigFilter
+          enabled: true
+        stat:
+          # 开启 Web 监控
+          enabled: true
+      aop-stat:
+        # 开启 Aop 监控
+        enabled: true
+      stat-view-servlet:
+        # 开启监控页面
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: true
+        login-username: admin
+        login-password: admin
 management:
   security:
     enabled: false
@@ -65,8 +68,6 @@ server:
   tomcat:
     max-connections: 100
     max-threads: 100
-
-endpoints:
   actuator:
     enabled: true
   druid:
@@ -85,9 +86,7 @@ swagger:
   base-package: com.weteam.helloworld.controller
   base-path: /**
 
-spring:
-
-## BeetlSQL configuration
+## BeetlSQL configuration.  Doc: http://ibeetl.com/guide/#beetlsql
 # 开发 debug 模式, 默认是true，即向控制台输出执行时候的sql，参数，执行时间，以及执行的位置，每次修改sql文件的时候，自动检测sql文件修改.
 beetl-beetlsq.dev: true
 beetl:
@@ -101,13 +100,10 @@ beetlsql:
   # Dao后缀，默认为Dao
   daoSuffix: Dao
   # 默认为com，此选项配置beetlsql.daoSuffix来自动扫描com包极其子包下的所有以Dao结尾的Mapper类。以本章例子而言，你可以配置“com.bee.sample.ch5.dao”
-  basePackage: com.
+  basePackage: com.weteam.helloworld.dao
   # 默认是org.beetl.sql.core.UnderlinedNameConversion,能将下划线分割的数据库命名风格转化为java驼峰命名风格;
   # 还有常用的DefaultNameConversion，数据库命名完全和Java命名一直，以及JPA2NameConversion，兼容JPA命名;
   nameConversion: org.beetl.sql.core.UnderlinedNameConversion
   # 数据库风格，默认是org.beetl.sql.core.db.MySqlStyle.对应不同的数据库;
   # 其他还有OracleStyle，PostgresStyle, SqlServerStyle, DB2SqlStyle, SQLiteStyle, H2Style
   dbStyle: org.beetl.sql.core.db.MySqlStyle
-
-
-
