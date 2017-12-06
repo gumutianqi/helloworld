@@ -3,7 +3,7 @@
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <contextName>spring-boot2-case</contextName>
     <property name="application.name" value="helloworld"/>
-    <property name="log.path" value="./logs/${application.name}"/>
+    <property name="log.path" value="/var/logs/${application.name}"/>
     <property name="log.level" value="INFO"/>
 
     <!--输出到文件-->

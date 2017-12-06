@@ -34,11 +34,6 @@
 	</properties>
 
 	<dependencies>
-		<!--<dependency>-->
-			<!--<groupId>com.alibaba</groupId>-->
-			<!--<artifactId>druid</artifactId>-->
-			<!--<version>${druid.version}</version>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
@@ -120,30 +115,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <imageName>${docker.registry.namespace}/${project.artifactId}</imageName>
-                    <dockerDirectory>.</dockerDirectory>
-                    <imageName>${docker.registry}/${docker.registry.namespace}</imageName>
-                    <imageTags>
-                        <imageTag>${project.version}</imageTag>
-                        <imageTag>latest</imageTag>
-                    </imageTags>
-                    <forceTags>true</forceTags>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                    <serverId>aliyun-docker-hub</serverId>
-                    <registryUrl>${docker.registry}</registryUrl>
-                </configuration>
-            </plugin>
 		</plugins>
 	</build>
 </project>
