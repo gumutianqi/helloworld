@@ -58,7 +58,7 @@ public class LocalDateTimeBeanProcessor extends BeanProcessor {
                 ps.setTimestamp(i + 1, Timestamp.valueOf(d));
                 continue;
             }
-            // 兼容性修改：oralce 驱动 不识别util.Date
+            // 兼容性修改：oracle 驱动 不识别util.Date
             if (dbType == DBStyle.DB_ORACLE || dbType == DBStyle.DB_POSTGRES || dbType == DBStyle.DB_DB2) {
                 if (c == java.util.Date.class) {
                     o = new Timestamp(((java.util.Date) o).getTime());
