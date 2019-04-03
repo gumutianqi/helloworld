@@ -1,0 +1,12 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: dingtalk
+    image: lddsb/drone-dingtalk-message
+    settings:
+      token: 6bd0b785910eb2d6bc634075ca14dda407162e4598008d214f7dcd3397203bbe
+      type: markdown
+      message_color: true
+      message_pic: true
+      sha_link: true
