@@ -2,11 +2,24 @@ kind: pipeline
 name: default
 
 steps:
-  - name: send-dingtalk
-    image: lddsb/drone-dingtalk-message
+  - name: maven-build
+    image: java:openjdk-8-alpine
+    commands:
+    - mvn clean package -U
+  - name: docker
+    image: plugins/docker
     settings:
-      token: 6bd0b785910eb2d6bc634075ca14dda407162e4598008d214f7dcd3397203bbe
-      type: markdown
-      message_color: true
-      message_pic: true
-      sha_link: true
+      username: jianguo.gu
+      password:
+        from_secret: nexus-password
+      registry: registry.sxw.cn
+      mirror: hub.sxw.cn
+      repo: registry.sxw.cn/gumutianqi/helloworld
+      purge: true
+      tags:
+        - ${DRONE_COMMIT_SHA:1.0.0}
+        - ${DRONE_COMMIT}
+        - drone-v1
+        - drone-latest
+
+
