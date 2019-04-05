@@ -6,21 +6,5 @@ steps:
     image: maven:3.6.0-jdk-8-alpine
     commands:
       - mvn -version
-      - mvn clean package -U
-  - name: docker
-    image: plugins/docker
-    settings:
-      username: jianguo.gu
-      password:
-        from_secret: nexus-password
-      registry: registry.sxw.cn
-      mirror: hub.sxw.cn
-      repo: registry.sxw.cn/gumutianqi/helloworld
-      purge: true
-      tags:
-        - ${DRONE_COMMIT_SHA:1.0.0}
-        - ${DRONE_COMMIT}
-        - drone-v1
-        - drone-latest
 
 
