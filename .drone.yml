@@ -1,11 +1,11 @@
 kind: pipeline
-name: default
+name: go-to-build
 
 steps:
   - name: maven-build
     image: java:openjdk-8-alpine
     commands:
-    - mvn clean package -U
+      - mvn clean package -U
   - name: docker
     image: plugins/docker
     settings:
